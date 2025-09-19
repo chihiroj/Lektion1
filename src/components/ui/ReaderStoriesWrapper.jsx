@@ -3,13 +3,16 @@ import { ReaderStoriesArticle } from "./ReaderStoriesArticle";
 import { Alert, Flex, Container } from "@chakra-ui/react";
 
 /**
- * 
+ * Loads reader-submitted articles from localStorage
+ * and displays them as a list of ReaderStoriesArticle cards.
+ * Shows an informational alert if no stories exist.
  */
 export const ReaderStoriesWrapper = () => {
   const [readerStories, setReaderStories] = useState([]);
 
   /**
-   * 
+   * Load saved articles from localStorage
+   * when the component mounts and store them in state.
    */
   useEffect(() => {
     const stored = localStorage.getItem("articles");

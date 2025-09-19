@@ -3,19 +3,22 @@ import { Container } from '@chakra-ui/react'
 import { Toaster } from "@/components/ui/toaster"
 import './App.css'
 import NavBar from './components/ui/navbar'
-import { useState } from 'react'
 import HomePage from './components/ui/HomePage'
 import AddArticlePage from './components/ui/AddArticlePage'
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
-  const [page, setPage] = useState("Home");
+
 
   return (
     <>
-      <NavBar setPage={setPage} />
+      <NavBar />
       <Container>
-        {page === "Home" && <HomePage />}
-        {page === "AddArticle" && <AddArticlePage />}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/add-article" element={<AddArticlePage />} />
+          <Route path="*" element={<h1>404 – Not Found</h1>} />
+        </Routes>
         <Toaster />
       </Container>
     </>

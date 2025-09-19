@@ -1,14 +1,20 @@
-import React from "react";
 import { Text, Heading, Field, Input, Textarea, Checkbox, Button, Fieldset, Center } from "@chakra-ui/react";
-import { toaster, Toaster } from "@/components/ui/toaster";
+import { toaster } from "@/components/ui/toaster";
+import { useColorChange } from "@/useColorChange";
 
 /**
- * 
+ * Displays a form for writing an article,
+ * saves the submitted data to localStorage,
+ * and shows a toast notification on success.
  */
 export default function AddArticlePage() {
+  const color = useColorChange((s) => s.color);
 
   /**
-   * 
+   *  Prevents default page reload
+   * - Collects form data and adds a random id
+   * - Stores the article in localStorage
+   * - Resets the form and shows a success toast
    */
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,7 +69,7 @@ export default function AddArticlePage() {
               <Checkbox.Label>Privacy & Policy</Checkbox.Label>
             </Checkbox.Root >
           </Fieldset.Content>
-          <Button mt="4" type="submit" maxW="20" size="sm">Submit</Button>
+          <Button backgroundColor={color} mt="4" type="submit" maxW="20" size="sm">Submit</Button>
         </form>
       </Fieldset.Root>
 

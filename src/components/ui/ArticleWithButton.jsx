@@ -1,9 +1,14 @@
+import { useColorChange } from "@/useColorChange";
 import { Button, Card, Image } from "@chakra-ui/react"
 
 /**
- * 
+ *  Renders a single article card with an image,
+ * the article’s title and body text,
+ * and a “Read more” button.
  */
 export const ArticleWithButton = ({ post }) => {
+  const color = useColorChange((s) => s.color);
+
   return (
 
     <Card.Root maxW="18rem" overflow="hidden">
@@ -19,7 +24,7 @@ export const ArticleWithButton = ({ post }) => {
 
       </Card.Body>
       <Card.Footer justifyContent="flex-end">
-        <Button variant="solid">Read more</Button>
+        <Button backgroundColor={color} variant="solid">Read more</Button>
 
       </Card.Footer>
     </Card.Root>

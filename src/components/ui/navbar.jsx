@@ -1,9 +1,14 @@
 import React from "react";
 import { Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
 import Logo from "./Logo";
+import { Link } from "react-router-dom";
+import { useColorChange } from "@/useColorChange";
 
 /**
- * 
+ * Responsive navigation bar with:
+ *  - site logo
+ *  - a hamburger menu for small screens
+ *  - navigation links that call setPage when clicked.
  */
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -17,7 +22,7 @@ const NavBar = (props) => {
         color="black"
       />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks setPage={props.setPage} isOpen={isOpen} />
+      <MenuLinks isOpen={isOpen} />
     </NavBarContainer>
   );
 };
@@ -52,17 +57,21 @@ const MenuToggle = ({ toggle, isOpen }) => {
   );
 };
 
-const MenuItem = ({ children, isLast, to, setPage, ...rest }) => {
+const MenuItem = ({ children, to }) => {
   return (
-    <Button onClick={() => setPage(to)} variant="plain">
-      <Text fontSize="lg" display="block" {...rest}>
+    <Text fontSize="lg" display="block" color="black">
+      <Link to={to}>
         {children}
-      </Text>
-    </Button>
+      </Link>
+    </Text>
   );
 };
 
-const MenuLinks = ({ setPage, isOpen }) => {
+const MenuLinks = ({ isOpen }) => {
+  const newColor = useColorChange((s) => s.color === "black" ? "dark red" : "black");
+  const color = useColorChange((s) => s.color);
+  const change = useColorChange((s) => s.change);
+
   return (
     <Box
       display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -75,10 +84,11 @@ const MenuLinks = ({ setPage, isOpen }) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem setPage={setPage} to="Home">Home</MenuItem>
-        <MenuItem setPage={setPage} to="AddArticle">Add article </MenuItem>
-        <MenuItem setPage={setPage} to="">Sign in </MenuItem>
-        <MenuItem setPage={setPage} to="">Subscribe </MenuItem>
+        <Button backgroundColor={color} onClick={change}>Turn buttons {newColor}</Button>
+        <MenuItem to="/">Home</MenuItem>
+        <MenuItem to="/add-article">Add article </MenuItem>
+        <MenuItem >Sign in </MenuItem>
+        <MenuItem >Subscribe </MenuItem>
       </Stack>
     </Box >
   );

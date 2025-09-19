@@ -3,7 +3,9 @@ import { LuX } from "react-icons/lu"
 import { toaster } from "@/components/ui/toaster";
 
 /**
- * 
+ * Removes an article from localStorage by id,
+ * updates the parent component’s reader-stories state,
+ * and shows a toast notification.
  */
 const deleteArticle = (id, setReaderStories) => {
   const stored = JSON.parse(localStorage.getItem("articles") || "[]");
@@ -17,7 +19,9 @@ const deleteArticle = (id, setReaderStories) => {
 };
 
 /**
- * 
+ * Renders a single reader-submitted article as a horizontal card
+ * with an image, title, short description,
+ * and buttons to delete or read the full article.
  */
 export const ReaderStoriesArticle = ({ post, setReaderStories }) => (
 

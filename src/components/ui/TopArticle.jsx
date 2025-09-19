@@ -1,7 +1,9 @@
 import { Card, Center, Image } from "@chakra-ui/react"
 
 /**
- * 
+ * Highlights a single featured article inside a centered card.
+ * Shows the article title and body text,
+ * with a large image displayed in the footer.
  */
 export const TopArticle = ({ post }) => {
   return (

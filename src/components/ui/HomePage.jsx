@@ -7,13 +7,18 @@ import { TopArticle } from "./TopArticle";
 import { ReaderStoriesWrapper } from "./ReaderStoriesWrapper";
 
 /**
- * 
+ * Fetches a list of posts and displays them
+ * in several layout sections: a top article,
+ * a three-article row, multiple two-article rows,
+ * and a reader-stories section.
  */
 export default function HomePage() {
   const [posts, setPost] = useState([]);
 
   /**
-   * 
+   * Fetch posts from the dummy JSON API when
+   * the component mounts, then store them
+   * in local state for rendering.
    */
   useEffect(() => {
     fetch("https://dummyjson.com/posts")
