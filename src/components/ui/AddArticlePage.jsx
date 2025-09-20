@@ -22,6 +22,7 @@ export default function AddArticlePage() {
     const formData = new FormData(e.target);
     const article = Object.fromEntries(formData.entries());
     article.id = Math.random().toString(36).substr(2, 9);
+    article.likes = 0;
 
     const stored = JSON.parse(localStorage.getItem("articles") || "[]");
     stored.push(article);

@@ -1,6 +1,8 @@
 import { Box, Button, Card, Image } from "@chakra-ui/react"
 import { LuX } from "react-icons/lu"
 import { toaster } from "@/components/ui/toaster";
+import { Link } from "react-router-dom";
+import { useColorChange } from "@/useColorChange";
 
 /**
  * Removes an article from localStorage by id,
@@ -23,30 +25,32 @@ const deleteArticle = (id, setReaderStories) => {
  * with an image, title, short description,
  * and buttons to delete or read the full article.
  */
-export const ReaderStoriesArticle = ({ post, setReaderStories }) => (
-
-  <Card.Root flexDirection="row" overflow="hidden" >
-    <Image
-      objectFit="cover"
-      maxW={{ base: "200px", md: "200px" }}
-      src={post.imageUrl}
-      alt="Caffe Latte"
-    />
-    <Box w="100%">
-      <Card.Body>
-        <Card.Title mb="2">{post.title}</Card.Title>
-        <Card.Description>
-          {post.body.substr(0, 120) + '...'}
-        </Card.Description>
-      </Card.Body >
-      <Card.Footer justifyContent="flex-end" flexWrap="wrap">
-        <Button variant="subtle" colorPalette="red"
-          onClick={() => deleteArticle(post.id, setReaderStories)}>
-          <LuX />
-          Delete
-        </Button>
-        <Button variant="solid">Read more</Button>
-      </Card.Footer>
-    </Box >
-  </Card.Root >
-)
+export const ReaderStoriesArticle = ({ post, setReaderStories }) => {
+  const color = useColorChange((s) => s.color);
+  return (
+    <Card.Root flexDirection="row" overflow="hidden" >
+      <Image
+        objectFit="cover"
+        maxW={{ base: "200px", md: "200px" }}
+        src={post.imageUrl}
+        alt="Caffe Latte"
+      />
+      <Box w="100%">
+        <Card.Body>
+          <Card.Title mb="2">{post.title}</Card.Title>
+          <Card.Description>
+            {post.body.substr(0, 120) + '...'}
+          </Card.Description>
+        </Card.Body >
+        <Card.Footer justifyContent="flex-end" flexWrap="wrap">
+          <Button variant="subtle" colorPalette="red"
+            onClick={() => deleteArticle(post.id, setReaderStories)}>
+            <LuX />
+            Delete
+          </Button>
+          <Button as={Link} to={`/article/${post.id}`} variant="solid" bgColor={color}>Read more</Button>
+        </Card.Footer>
+      </Box >
+    </Card.Root >
+  );
+}

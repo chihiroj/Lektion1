@@ -6,6 +6,7 @@ import NavBar from './components/ui/navbar'
 import HomePage from './components/ui/HomePage'
 import AddArticlePage from './components/ui/AddArticlePage'
 import { Route, Routes } from 'react-router-dom'
+import { ArticlePage } from './components/ui/ArticlePage'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/add-article" element={<AddArticlePage />} />
+          <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="*" element={<h1>404 – Not Found</h1>} />
         </Routes>
         <Toaster />
